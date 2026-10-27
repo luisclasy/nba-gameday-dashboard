@@ -30,7 +30,7 @@
 要求 Python 3.11+。
 
 ```bash
-git clone https://github.com/<your-name>/nba-gameday-dashboard.git
+git clone https://github.com/luisclasy/nba-gameday-dashboard.git
 cd nba-gameday-dashboard
 
 python -m venv .venv
