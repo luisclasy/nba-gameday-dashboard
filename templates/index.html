@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA 观赛台 · 比赛与数据</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- ============ 顶部导航 ============ -->
+    <header class="app-header">
+        <a class="brand" href="/" aria-label="NBA 观赛台首页">
+            <span class="brand-ball">🏀</span>
+            <span class="brand-text">
+                <strong>NBA 观赛台</strong>
+                <small>GAME DAY · DATA DESK</small>
+            </span>
+        </a>
+
+        <div class="header-search">
+            <span class="search-icon">⌕</span>
+            <input id="searchInput" type="search" autocomplete="off"
+                   placeholder="搜索球员 / 球队 / 中文名，例如：库里、LAL">
+            <kbd>/</kbd>
+            <div id="searchResult" class="search-dropdown"></div>
+        </div>
+
+        <div class="header-actions">
+            <label class="cn-toggle" title="开启后球队、球员名称显示中文">
+                <input class="form-check-input" type="checkbox" id="cnToggle">
+                <span class="cn-toggle-label">中文</span>
+            </label>
+            <button id="favTeamBtn" class="btn btn-ghost" title="选择/切换主队（快捷键 F）" aria-label="选择主队">
+                <span class="btn-ico">★</span>
+                <span class="btn-label full">我的主队</span><span class="btn-label short">主队</span>
+            </button>
+            <button id="watchlistBtn" class="btn btn-ghost" title="观察名单（快捷键 W）" aria-label="观察名单">
+                <span class="btn-ico">📌</span>
+                <span class="btn-label full">观察名单</span><span class="btn-label short">观察</span>
+            </button>
+            <button id="compareBtn" class="btn btn-accent" title="球员对位对比（快捷键 C）" aria-label="球员对位对比">
+                <span class="btn-ico">⚔</span>
+                <span class="btn-label full">对位对比</span><span class="btn-label short">对位</span>
+            </button>
+            <button id="radarMultiBtn" class="btn btn-ghost" title="多球员对比（快捷键 M）" aria-label="多球员对比">
+                <span class="btn-ico">◎</span>
+                <span class="btn-label full">多人对比</span><span class="btn-label short">多人</span>
+            </button>
+            <button id="helpBtn" class="btn btn-icon" title="按钮与快捷键说明（?）" aria-label="帮助">?</button>
+        </div>
+    </header>
+
+    <!-- ============ 主队快捷条 ============ -->
+    <div class="team-strip">
+        <div class="strip-left">
+            <span class="strip-label">MY TEAMS</span>
+            <span id="favChips" class="fav-chips"></span>
+            <button id="favAddBtn" class="btn-chip">＋ 添加主队</button>
+        </div>
+        <div class="strip-right">
+            <span class="live-dot"></span>
+            <span>比分 / 伤病自动刷新</span>
+            <label class="remind-label">
+                <input type="checkbox" id="remindToggle"> 3 天内提醒
+            </label>
+        </div>
+    </div>
+
+    <main class="app-main">
+        <!-- ============ 最近比赛 ============ -->
+        <section class="game-day-section" aria-labelledby="gameDayTitle">
+            <div class="section-head">
+                <div>
+                    <span class="eyebrow">LIVE BOARD</span>
+                    <h2 id="gameDayTitle">最近比赛</h2>
+                    <p>北京时间 · 数据源 ESPN · 每分钟自动更新</p>
+                </div>
+                <div class="section-actions">
+                    <span id="recentUpdated" class="meta"></span>
+                    <button id="recentRefreshBtn" class="btn btn-ghost btn-sm" title="立即刷新最近比分">
+                        <span class="refresh-ico">↻</span> 刷新
+                    </button>
+                </div>
+            </div>
+            <div id="recentGamesBox" class="recent-games" aria-live="polite">加载中...</div>
+        </section>
+
+        <!-- ============ 联盟速览：东西部排名 + 冠军墙 ============ -->
+        <section class="league-section" aria-labelledby="leagueTitle">
+            <div class="league-grid">
+                <section class="card standings-card">
+                    <div class="card-head">
+                        <div>
+                            <span class="eyebrow">STANDINGS</span>
+                            <h3 id="leagueTitle">东西部排名</h3>
+                            <span id="standingsUpdated" class="meta"></span>
+                        </div>
+                        <div class="standings-legend">
+                            <span><i class="dot-playoff"></i>季后赛</span>
+                            <span><i class="dot-playin"></i>附加赛</span>
+                        </div>
+                    </div>
+                    <div class="standings-two">
+                        <div class="conference">
+                            <div class="conference-head"><span>东部</span><small>EAST</small></div>
+                            <div id="eastStandings" class="standings-table-wrap">加载中...</div>
+                        </div>
+                        <div class="conference">
+                            <div class="conference-head"><span>西部</span><small>WEST</small></div>
+                            <div id="westStandings" class="standings-table-wrap">加载中...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card champions-card">
+                    <div class="card-head">
+                        <div>
+                            <span class="eyebrow">HISTORY</span>
+                            <h3>冠军墙</h3>
+                            <span class="meta" title="数据源：ClutchTimes 1947–2026，第三方整理">1947–2026 · 冠军 / FMVP</span>
+                        </div>
+                        <button id="allChampionsBtn" class="btn btn-ghost btn-sm" title="查看全部冠军">全部冠军</button>
+                    </div>
+                    <div id="championWall" class="champion-wall">加载中...</div>
+                    <div id="fmvpLeaderboard" class="fmvp-board"></div>
+                    <div class="champion-foot">
+                        <span>🏆 队史冠军</span>
+                        <span>FMVP ×次数</span>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- ============ 工作区：主队 / 数据 ============ -->
+        <div class="workspace-grid">
+            <!-- 主队看板（球迷视角） -->
+            <aside class="team-column" aria-label="主队看板">
+                <section id="teamHero" class="team-hero">
+                    <div class="hero-top">
+                        <span id="teamHeroBadge" class="team-mark lg">NBA</span>
+                        <div class="hero-title">
+                            <span class="eyebrow">MY TEAM</span>
+                            <h2 id="favTeamName">未设置主队</h2>
+                            <p id="teamHeroMeta">选择一支主队，查看赛程、伤病与阵容</p>
+                        </div>
+                        <button id="teamHeroBtn" class="btn btn-ghost btn-sm">切换</button>
+                    </div>
+                    <div id="teamNextGame" class="next-game">
+                        <span class="next-empty">设置主队后显示下一场比赛</span>
+                    </div>
+                    <div id="teamStar" class="team-star">选择主队后显示当家球星</div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <h3>战绩</h3>
+                        <span class="meta">常规赛</span>
+                    </div>
+                    <div id="teamFormBox" class="form-box">设置主队后显示</div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <h3>赛程</h3>
+                        <span class="meta">北京时间</span>
+                    </div>
+                    <div id="scheduleBox" class="form-box">设置主队后显示</div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <h3>出勤</h3>
+                        <div class="btn-group btn-group-sm" id="attFilter">
+                            <button class="btn btn-outline-info active" data-f="all">全部</button>
+                            <button class="btn btn-outline-info" data-f="core">首发</button>
+                            <button class="btn btn-outline-info" data-f="edge">边缘</button>
+                        </div>
+                    </div>
+                    <div id="attendanceBox" class="form-box">设置主队后显示</div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <h3>伤病 / 出战成疑</h3>
+                        <span class="meta">ESPN</span>
+                    </div>
+                    <div id="injuryBox" class="form-box">设置主队后显示</div>
+                </section>
+
+                <section class="card">
+                    <div class="card-head">
+                        <h3>阵容结构</h3>
+                        <span class="meta">按位置</span>
+                    </div>
+                    <div id="rosterBox" class="form-box">设置主队后显示</div>
+                </section>
+            </aside>
+
+            <!-- 数据查询（分析师视角） -->
+            <section class="data-column" aria-label="数据查询">
+                <section class="card query-card">
+                    <div class="card-head">
+                        <div>
+                            <span class="eyebrow">QUERY</span>
+                            <h3>数据查询</h3>
+                        </div>
+                        <span class="meta">常规赛 / 季后赛 · 1950–2026</span>
+                    </div>
+
+                    <div class="query-grid">
+                        <div class="query-item">
+                            <label class="form-label">数据类型</label>
+                            <div class="btn-group btn-group-sm w-100" id="stageToggle">
+                                <button class="btn btn-outline-info active" data-stage="reg">🏀 常规赛</button>
+                                <button class="btn btn-outline-warning" data-stage="po">🔥 季后赛</button>
+                            </div>
+                        </div>
+                        <div class="query-item">
+                            <label class="form-label" for="seasonSelect">赛季</label>
+                            <select id="seasonSelect" class="form-select form-select-sm"></select>
+                            <div class="field-hint">2026 = 2025-26</div>
+                        </div>
+                        <div class="query-item">
+                            <label class="form-label" for="teamSelect">球队</label>
+                            <select id="teamSelect" class="form-select form-select-sm">
+                                <option value="">全部球队</option>
+                            </select>
+                        </div>
+                        <div class="query-item query-player">
+                            <label class="form-label" for="playerSelect">球员</label>
+                            <select id="playerSelect" class="form-select form-select-sm">
+                                <option value="">请选择球员</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="query-actions">
+                        <button id="detailBtn" class="btn btn-accent" title="打开球员完整赛季数据" disabled>📋 查看赛季详情</button>
+                        <button id="watchAddBtn" class="btn btn-success-soft" title="把当前球员加入观察名单" disabled>⭐ 加入观察名单</button>
+                        <button id="resetBtn" class="btn btn-ghost" title="清除球队/球员筛选，回到当前赛季默认视图">↺ 重置筛选</button>
+                        <span class="query-tip">选择球员后，下方图表与 KPI 自动联动</span>
+                    </div>
+
+                    <div id="playerInfo" class="player-summary">
+                        <span class="text-muted">选择一名球员，查看赛季概览</span>
+                    </div>
+                    <div id="playerKpis" class="kpi-grid"></div>
+                </section>
+
+                <section class="chart-grid">
+                    <article class="card chart-card wide">
+                        <div class="card-head">
+                            <div><h3>球队得分榜</h3><span class="meta">当前筛选赛季 · TOP15</span></div>
+                            <span class="chart-note">球队进攻产量</span>
+                        </div>
+                        <div id="barChart" class="chart chart-lg"></div>
+                    </article>
+
+                    <article class="card chart-card">
+                        <div class="card-head">
+                            <div><h3>球员六维雷达</h3><span class="meta">同赛季联盟刻度</span></div>
+                            <span class="chart-note">能力结构</span>
+                        </div>
+                        <div id="radarChart" class="chart chart-md"></div>
+                    </article>
+
+                    <article class="card chart-card">
+                        <div class="card-head">
+                            <div><h3>生涯得分趋势</h3><span class="meta">场均得分</span></div>
+                            <span class="chart-note">生涯曲线</span>
+                        </div>
+                        <div id="lineChart" class="chart chart-md"></div>
+                    </article>
+
+                    <article class="card chart-card wide">
+                        <div class="card-head">
+                            <div><h3>同位置得分手</h3><span class="meta">当季同位置 TOP3 · 多赛季趋势</span></div>
+                            <span class="chart-note">对位参考</span>
+                        </div>
+                        <div id="posTrendChart" class="chart chart-lg"></div>
+                    </article>
+
+                    <article class="card chart-card wide">
+                        <div class="card-head">
+                            <div><h3>球队多指标</h3><span class="meta">当前筛选 · 平行坐标 · 场均</span></div>
+                            <span class="chart-note">阵容对比</span>
+                        </div>
+                        <div id="parallelChart" class="chart chart-lg"></div>
+                    </article>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <!-- ============ 球员详情弹窗 ============ -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">PLAYER REPORT</span>
+                        <h5 class="modal-title mb-0">球员赛季技术统计</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <div class="row g-2 align-items-end mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label mb-1 small">数据类型</label>
+                            <div class="btn-group btn-group-sm w-100" id="detailStageToggle">
+                                <button class="btn btn-outline-info active" data-stage="reg">🏀 常规赛</button>
+                                <button class="btn btn-outline-warning" data-stage="po">🔥 季后赛</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label mb-1 small">赛季</label>
+                            <select id="detailSeason" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label mb-1 small">趋势范围</label>
+                            <div class="btn-group btn-group-sm w-100" id="detailRangeToggle">
+                                <button class="btn btn-outline-light active" data-range="5">近5年</button>
+                                <button class="btn btn-outline-light" data-range="10">近10年</button>
+                                <button class="btn btn-outline-light" data-range="all">全部</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="detailAlert" class="alert alert-warning py-2 small" style="display:none;"></div>
+
+                    <div class="row g-3">
+                        <div class="col-lg-5">
+                            <table class="table table-sm table-dark table-striped mb-0">
+                                <tbody id="detailBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="small text-info mb-1">📈 多赛季全指标趋势（每 5 年一档可切换）</div>
+                            <div id="detailTrendChart" class="detail-trend-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 主队选择弹窗 ============ -->
+    <div class="modal fade" id="favTeamModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">PREFERENCES</span>
+                        <h5 class="modal-title mb-0">选择我的主队</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-2">可多选（最多 5 支），点击已选球队可取消关注。</p>
+                    <div id="teamGrid" class="team-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 观察名单弹窗 ============ -->
+    <div class="modal fade" id="watchlistModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">WATCHLIST</span>
+                        <h5 class="modal-title mb-0">我的观察名单</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2 align-items-end mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label mb-1 small">查看数据类型</label>
+                            <div class="btn-group btn-group-sm w-100" id="watchStageToggle">
+                                <button class="btn btn-outline-info active" data-stage="reg">🏀 常规赛</button>
+                                <button class="btn btn-outline-warning" data-stage="po">🔥 季后赛</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label mb-1 small">查看赛季</label>
+                            <select id="watchSeason" class="form-select form-select-sm"></select>
+                        </div>
+                    </div>
+                    <div id="watchlistBox" class="watchlist-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 对位对比弹窗 ============ -->
+    <div class="modal fade" id="compareModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">MATCHUP</span>
+                        <h5 class="modal-title mb-0">球员对位对比</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label">球员 A（我方）</label>
+                            <select id="compareA" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-2 text-center align-self-end">
+                            <div class="vs-wrap">
+                                <span class="vs-text">VS</span>
+                                <button id="compareSwapBtn" class="btn btn-ghost btn-sm" title="交换 A/B 两侧球员" disabled>⇄ 交换</button>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">球员 B（对手）</label>
+                            <select id="compareB" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label mb-1">数据类型</label>
+                            <div class="btn-group btn-group-sm w-100" id="compareStageToggle">
+                                <button class="btn btn-outline-info active" data-stage="reg">🏀 常规赛</button>
+                                <button class="btn btn-outline-warning" data-stage="po">🔥 季后赛</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label mb-1">对比赛季</label>
+                            <select id="compareSeason" class="form-select form-select-sm"></select>
+                        </div>
+                    </div>
+                    <div id="compareResult" class="compare-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 历史交锋弹窗 ============ -->
+    <div class="modal fade" id="h2hModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">HEAD TO HEAD</span>
+                        <h5 class="modal-title mb-0" id="h2hTitle">历史交锋</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="h2hBody"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 多球员雷达对比弹窗 ============ -->
+    <div class="modal fade" id="radarMultiModal" tabindex="-1">
+        <div class="modal-dialog multi-modal-dialog modal-dialog-scrollable">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">COMPARE</span>
+                        <h5 class="modal-title mb-0">多球员六维雷达对比（2–6 人）</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2 mb-2 align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label mb-1">数据类型</label>
+                            <div class="btn-group btn-group-sm w-100" id="multiStageToggle">
+                                <button class="btn btn-outline-info active" data-stage="reg">🏀 常规赛</button>
+                                <button class="btn btn-outline-warning" data-stage="po">🔥 季后赛</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label mb-1">对比赛季</label>
+                            <select id="multiSeason" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label mb-1">加入球员</label>
+                            <select id="multiAdd" class="form-select form-select-sm">
+                                <option value="">—— 选择球员加入对比 ——</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="multiAddBtn" class="btn btn-accent w-100" title="把下拉框中的球员加入对比" disabled>＋ 添加</button>
+                        </div>
+                    </div>
+                    <div class="multi-bar">
+                        <div id="multiChips" class="multi-chips"></div>
+                        <button id="multiClearBtn" class="btn btn-ghost btn-sm" title="清空已选球员" disabled>清空</button>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-lg-6">
+                            <div id="multiRadar" class="multi-radar"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="multiBar" class="multi-radar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 全部冠军 / FMVP ============ -->
+    <div class="modal fade" id="championsModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">CHAMPIONSHIP HISTORY</span>
+                        <h5 class="modal-title mb-0">历届 NBA 总冠军与 FMVP · 1947–2026</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="championsTable" class="champions-table-wrap">加载中...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 帮助 / 快捷键 ============ -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content detail-modal">
+                <div class="modal-header">
+                    <div>
+                        <span class="eyebrow">SHORTCUTS</span>
+                        <h5 class="modal-title mb-0">按钮与快捷键</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="help-grid">
+                        <div class="help-item"><kbd>/</kbd><span>聚焦顶部搜索</span></div>
+                        <div class="help-item"><kbd>F</kbd><span>选择 / 切换主队</span></div>
+                        <div class="help-item"><kbd>W</kbd><span>打开观察名单</span></div>
+                        <div class="help-item"><kbd>C</kbd><span>打开对位对比</span></div>
+                        <div class="help-item"><kbd>M</kbd><span>打开多人对比</span></div>
+                        <div class="help-item"><kbd>?</kbd><span>打开本帮助</span></div>
+                        <div class="help-item"><kbd>Esc</kbd><span>关闭弹窗 / 清空搜索</span></div>
+                    </div>
+                    <hr class="help-sep">
+                    <p class="help-note">数据查询区：选择赛季/球队/球员后，KPI、雷达、趋势会自动联动；「重置筛选」会清空球队筛选并回到当前赛季得分最高的球员。</p>
+                    <p class="help-note">最近比赛右上角「刷新」会立即请求 ESPN；页面本身也会每 60 秒自动刷新比分。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
+
+    <script src="/static/js/echarts.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

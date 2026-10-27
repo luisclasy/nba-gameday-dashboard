@@ -1,0 +1,34 @@
+NBA Gameday Dashboard — data and third-party notices
+
+The MIT License in this repository applies to the original source code of
+this project. It does not grant rights to the underlying basketball data,
+team marks, league marks, or third-party assets.
+
+Data and services used by this project
+--------------------------------------
+
+1. Historical NBA player/team/playoff statistics
+   Source: Kaggle, "NBA Players stats since 1950" and related CSV files.
+   The dataset's own license and attribution requirements apply.
+
+2. Current schedule
+   Source: NBA public schedule data (scheduleLeagueV2).
+   NBA and team marks are the property of their respective owners.
+
+3. Recent scores and injuries
+   Source: ESPN public endpoints used for educational, non-commercial
+   demonstration. ESPN and NBA marks belong to their respective owners.
+   These endpoints are unofficial and may change or be rate-limited.
+
+4. Champions / Finals MVP
+   Source: The Clutch Times, "NBA 历届总冠军与 FMVP 完整名单" (1947–2026),
+   a third-party compilation. Verify against official NBA data before citing.
+
+5. Front-end libraries
+   ECharts, Bootstrap and their bundled assets retain their original
+   licenses and copyright notices. See the headers of the files under
+   static/js/ and static/css/.
+
+This repository is intended for course work, research and technical
+demonstration. Do not represent the data as official NBA/ESPN data, and do
+not redistribute third-party data without checking its license.

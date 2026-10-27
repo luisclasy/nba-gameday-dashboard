@@ -1,0 +1,81 @@
+season,champion,champion_abbr,runner_up,series,fmvp,fmvp_team_abbr,source
+2026,纽约尼克斯,NYK,圣安东尼奥马刺,4-1,Jalen Brunson,NYK,ClutchTimes
+2025,俄克拉荷马雷霆,OKC,印第安纳步行者,4-3,Shai Gilgeous-Alexander,OKC,ClutchTimes
+2024,波士顿凯尔特人,BOS,达拉斯独行侠,4-1,Jaylen Brown,BOS,ClutchTimes
+2023,丹佛掘金,DEN,迈阿密热火,4-1,Nikola Jokić,DEN,ClutchTimes
+2022,金州勇士,GSW,波士顿凯尔特人,4-2,Stephen Curry,GSW,ClutchTimes
+2021,密尔沃基雄鹿,MIL,菲尼克斯太阳,4-2,Giannis Antetokounmpo,MIL,ClutchTimes
+2020,洛杉矶湖人,LAL,迈阿密热火,4-2,LeBron James,LAL,ClutchTimes
+2019,多伦多猛龙,TOR,金州勇士,4-2,Kawhi Leonard,TOR,ClutchTimes
+2018,金州勇士,GSW,克利夫兰骑士,4-0,Kevin Durant,GSW,ClutchTimes
+2017,金州勇士,GSW,克利夫兰骑士,4-1,Kevin Durant,GSW,ClutchTimes
+2016,克利夫兰骑士,CLE,金州勇士,4-3,LeBron James,CLE,ClutchTimes
+2015,金州勇士,GSW,克利夫兰骑士,4-2,Andre Iguodala,GSW,ClutchTimes
+2014,圣安东尼奥马刺,SAS,迈阿密热火,4-1,Kawhi Leonard,SAS,ClutchTimes
+2013,迈阿密热火,MIA,圣安东尼奥马刺,4-3,LeBron James,MIA,ClutchTimes
+2012,迈阿密热火,MIA,俄克拉荷马雷霆,4-1,LeBron James,MIA,ClutchTimes
+2011,达拉斯独行侠,DAL,迈阿密热火,4-2,Dirk Nowitzki,DAL,ClutchTimes
+2010,洛杉矶湖人,LAL,波士顿凯尔特人,4-3,Kobe Bryant,LAL,ClutchTimes
+2009,洛杉矶湖人,LAL,奥兰多魔术,4-1,Kobe Bryant,LAL,ClutchTimes
+2008,波士顿凯尔特人,BOS,洛杉矶湖人,4-2,Paul Pierce,BOS,ClutchTimes
+2007,圣安东尼奥马刺,SAS,克利夫兰骑士,4-0,Tony Parker,SAS,ClutchTimes
+2006,迈阿密热火,MIA,达拉斯独行侠,4-2,Dwyane Wade,MIA,ClutchTimes
+2005,圣安东尼奥马刺,SAS,底特律活塞,4-3,Tim Duncan,SAS,ClutchTimes
+2004,底特律活塞,DET,洛杉矶湖人,4-0,Chauncey Billups,DET,ClutchTimes
+2003,圣安东尼奥马刺,SAS,新泽西篮网,4-2,Tim Duncan,SAS,ClutchTimes
+2002,洛杉矶湖人,LAL,新泽西篮网,4-0,Shaquille O'Neal,LAL,ClutchTimes
+2001,洛杉矶湖人,LAL,费城76人,4-1,Shaquille O'Neal,LAL,ClutchTimes
+2000,洛杉矶湖人,LAL,印第安纳步行者,4-2,Shaquille O'Neal,LAL,ClutchTimes
+1999,圣安东尼奥马刺,SAS,纽约尼克斯,4-1,Tim Duncan,SAS,ClutchTimes
+1998,芝加哥公牛,CHI,猶他爵士,4-2,Michael Jordan,CHI,ClutchTimes
+1997,芝加哥公牛,CHI,猶他爵士,4-2,Michael Jordan,CHI,ClutchTimes
+1996,芝加哥公牛,CHI,西雅图超音速,4-2,Michael Jordan,CHI,ClutchTimes
+1995,休斯顿火箭,HOU,奥兰多魔术,4-0,Hakeem Olajuwon,HOU,ClutchTimes
+1994,休斯顿火箭,HOU,纽约尼克斯,4-3,Hakeem Olajuwon,HOU,ClutchTimes
+1993,芝加哥公牛,CHI,菲尼克斯太阳,4-2,Michael Jordan,CHI,ClutchTimes
+1992,芝加哥公牛,CHI,波特兰开拓者,4-2,Michael Jordan,CHI,ClutchTimes
+1991,芝加哥公牛,CHI,洛杉矶湖人,4-1,Michael Jordan,CHI,ClutchTimes
+1990,底特律活塞,DET,波特兰开拓者,4-1,Isiah Thomas,DET,ClutchTimes
+1989,底特律活塞,DET,洛杉矶湖人,4-0,Joe Dumars,DET,ClutchTimes
+1988,洛杉矶湖人,LAL,底特律活塞,4-3,James Worthy,LAL,ClutchTimes
+1987,洛杉矶湖人,LAL,波士顿凯尔特人,4-2,Magic Johnson,LAL,ClutchTimes
+1986,波士顿凯尔特人,BOS,休斯顿火箭,4-2,Larry Bird,BOS,ClutchTimes
+1985,洛杉矶湖人,LAL,波士顿凯尔特人,4-2,Kareem Abdul-Jabbar,LAL,ClutchTimes
+1984,波士顿凯尔特人,BOS,洛杉矶湖人,4-3,Larry Bird,BOS,ClutchTimes
+1983,费城76人,PHI,洛杉矶湖人,4-0,Moses Malone,PHI,ClutchTimes
+1982,洛杉矶湖人,LAL,费城76人,4-2,Magic Johnson,LAL,ClutchTimes
+1981,波士顿凯尔特人,BOS,休斯顿火箭,4-2,Cedric Maxwell,BOS,ClutchTimes
+1980,洛杉矶湖人,LAL,费城76人,4-2,Magic Johnson,LAL,ClutchTimes
+1979,西雅图超音速,OKC,华盛顿子弹,4-1,Dennis Johnson,OKC,ClutchTimes
+1978,华盛顿子弹,WAS,西雅图超音速,4-3,Wes Unseld,WAS,ClutchTimes
+1977,波特兰开拓者,POR,费城76人,4-2,Bill Walton,POR,ClutchTimes
+1976,波士顿凯尔特人,BOS,菲尼克斯太阳,4-2,Jo Jo White,BOS,ClutchTimes
+1975,金州勇士,GSW,华盛顿子弹,4-0,Rick Barry,GSW,ClutchTimes
+1974,波士顿凯尔特人,BOS,密尔沃基雄鹿,4-3,John Havlicek,BOS,ClutchTimes
+1973,纽约尼克斯,NYK,洛杉矶湖人,4-1,Willis Reed,NYK,ClutchTimes
+1972,洛杉矶湖人,LAL,纽约尼克斯,4-1,Wilt Chamberlain,LAL,ClutchTimes
+1971,密尔沃基雄鹿,MIL,巴尔的摩子弹,4-0,Kareem Abdul-Jabbar,MIL,ClutchTimes
+1970,纽约尼克斯,NYK,洛杉矶湖人,4-3,Willis Reed,NYK,ClutchTimes
+1969,波士顿凯尔特人,BOS,洛杉矶湖人,4-3,Jerry West,LAL,ClutchTimes
+1968,波士顿凯尔特人,BOS,洛杉矶湖人,4-2,,,ClutchTimes
+1967,费城76人,PHI,旧金山勇士,4-2,,,ClutchTimes
+1966,波士顿凯尔特人,BOS,洛杉矶湖人,4-2,,,ClutchTimes
+1965,波士顿凯尔特人,BOS,洛杉矶湖人,4-3,,,ClutchTimes
+1964,波士顿凯尔特人,BOS,圣路易老鹰,4-1,,,ClutchTimes
+1963,波士顿凯尔特人,BOS,圣路易老鹰,4-0,,,ClutchTimes
+1962,波士顿凯尔特人,BOS,洛杉矶湖人,4-2,,,ClutchTimes
+1961,波士顿凯尔特人,BOS,圣路易老鹰,4-3,,,ClutchTimes
+1960,波士顿凯尔特人,BOS,圣路易老鹰,4-3,,,ClutchTimes
+1959,波士顿凯尔特人,BOS,明尼阿波利斯湖人,4-0,,,ClutchTimes
+1958,圣路易老鹰,ATL,波士顿凯尔特人,4-2,,,ClutchTimes
+1957,波士顿凯尔特人,BOS,圣路易老鹰,4-3,,,ClutchTimes
+1956,费城勇士,GSW,福特偉恩活塞,4-1,,,ClutchTimes
+1955,锡拉丘兹民族,PHI,福特偉恩活塞,4-3,,,ClutchTimes
+1954,明尼阿波利斯湖人,LAL,塞拉庫斯民族,4-3,,,ClutchTimes
+1953,明尼阿波利斯湖人,LAL,纽约尼克斯,4-1,,,ClutchTimes
+1952,明尼阿波利斯湖人,LAL,纽约尼克斯,4-3,,,ClutchTimes
+1951,罗切斯特皇家,SAC,纽约尼克斯,4-3,,,ClutchTimes
+1950,明尼阿波利斯湖人,LAL,塞拉庫斯民族,4-2,,,ClutchTimes
+1949,明尼阿波利斯湖人,LAL,华盛顿国会,4-2,,,ClutchTimes
+1948,巴尔的摩子弹,BAL,費城勇士,4-2,,,ClutchTimes
+1947,费城勇士,GSW,芝加哥牡鹿,4-1,,,ClutchTimes
